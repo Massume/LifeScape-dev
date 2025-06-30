@@ -43,3 +43,11 @@ Authenticated endpoints require the bearer token in the `Authorization` header. 
 
 The confirmation code printed in the API logs is the only place where it is shown, so check your terminal output after registration.
 
+## Creating your city
+
+Once authenticated you can start building the digital city. First create a district with `POST /districts` providing the district name. For each district you can create streets via `POST /streets` and by specifying the `districtId` received earlier.
+
+Every decision is created with `POST /decisions` where you send the `streetId` it belongs to and whether it is positive (`isPositive: true` or `false`). Buildings are created via `POST /buildings` and reference both the `streetId` and the `decisionId`. A building also stores `visualState` which describes how the decision is visualised: `good`, `bad` or `neutral`.
+
+Deleting a district with `DELETE /districts/:id` will automatically remove all related streets, buildings and decisions.
+

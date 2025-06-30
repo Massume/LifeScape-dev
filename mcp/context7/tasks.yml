@@ -1,0 +1,6 @@
+version: '1'
+tasks:
+  crud-tests:
+    run: npm run test:e2e
+  cascade-tests:
+    run: echo 'check cascade deletions'

@@ -24,6 +24,7 @@ model District {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   streets   Street[]
+  decisions Decision[]
 }
 
 model Street {
@@ -32,6 +33,7 @@ model Street {
   districtId String
   district   District  @relation(fields: [districtId], references: [id], onDelete: Cascade)
   buildings  Building[]
+  decisions  Decision[]
 }
 
 model Building {
@@ -40,14 +42,25 @@ model Building {
   streetId  String
   street    Street   @relation(fields: [streetId], references: [id], onDelete: Cascade)
   decision  Decision?
+  visualState VisualState
 }
 
 model Decision {
   id         String   @id @default(uuid())
   title      String
-  isGood     Boolean
+  isPositive Boolean
   userId     String
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  districtId String
+  district   District  @relation(fields: [districtId], references: [id], onDelete: Cascade)
+  streetId   String
+  street     Street    @relation(fields: [streetId], references: [id], onDelete: Cascade)
   buildingId String   @unique
   building   Building @relation(fields: [buildingId], references: [id], onDelete: Cascade)
+}
+
+enum VisualState {
+  good
+  bad
+  neutral
 }
