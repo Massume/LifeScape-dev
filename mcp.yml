@@ -1,0 +1,16 @@
+version: '1'
+
+tasks:
+  migrations:
+    run: docker-compose exec api npx prisma migrate deploy
+    watch:
+      - api/prisma/migrations
+
+  build:
+    run: docker-compose build
+    watch:
+      - api/**/*
+      - client/**/*
+
+  up:
+    run: docker-compose up -d
