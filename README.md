@@ -27,6 +27,22 @@ docker-compose up --build
 The API will be available on `http://localhost:4000` with Swagger docs at `http://localhost:4000/docs`.
 The frontend will be served on `http://localhost:3000`.
 
+## Frontend structure
+
+The Next.js application resides in `/client` using the App Router.
+Public pages are placed under `src/app/(auth)` while authenticated sections live
+under `src/app/(protected)` with an auth guard that checks the JWT token stored
+in `localStorage`.
+
+```
+client/src/app
+ ├─ (auth)            // login, register, confirm-email, google
+ ├─ (protected)       // main city view, profile and CRUD pages
+ └─ layout.tsx        // common navigation
+```
+
+UI end-to-end tests with Playwright can be run via `npm run test:ui`.
+
 ## Authentication
 
 User accounts are managed by the API. To register send a `POST /auth/register` request with `email` and `password`.
@@ -45,4 +61,16 @@ Once authenticated you can start building the digital city. First create a distr
 Every decision is created with `POST /decisions` where you send the `streetId` it belongs to and whether it is positive (`isPositive: true` or `false`). Buildings are created via `POST /buildings` and reference both the `streetId` and the `decisionId`. A building also stores `visualState` which describes how the decision is visualised: `good`, `bad` or `neutral`.
 
 Deleting a district with `DELETE /districts/:id` will automatically remove all related streets, buildings and decisions.
+
+### Example requests
+
+```bash
+# create a district
+curl -X POST $API_URL/districts -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Downtown"}'
+
+# list streets in a district
+curl $API_URL/streets?districtId=<id> -H "Authorization: Bearer <token>"
+```
 

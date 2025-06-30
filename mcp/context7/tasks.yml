@@ -8,3 +8,5 @@ tasks:
     run: docker-compose up -d --build
   health-check:
     run: bash -c "curl -f http://localhost:4000/docs && curl -f http://localhost:3000"
+  ui-tests:
+    run: bash -c "cd client && npm run test:ui"
