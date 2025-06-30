@@ -2,40 +2,33 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:15
+    image: postgres:14
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: lifescape
-    volumes:
-      - db-data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
 
   api:
     build: ./api
-    command: npm run start:prod
-    volumes:
-      - ./api:/usr/src/app
-    env_file:
-      - ./api/.env
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/lifescape
     ports:
-      - '3000:3000'
+      - '4000:3000'
     depends_on:
       - db
 
   client:
     build: ./client
-    command: npm run start
-    volumes:
-      - ./client:/usr/src/app
-    env_file:
-      - ./client/.env
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4000
     ports:
-      - '3001:3000'
+      - '3000:3000'
     depends_on:
       - api
 
 volumes:
   db-data:
+

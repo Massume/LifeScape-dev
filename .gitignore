@@ -12,6 +12,7 @@ logs
 .env
 .env.*
 !api/.env.example
+!.env.example
 
 # Next.js
 .next
@@ -27,6 +28,8 @@ prisma/dev.db
 # Docker
 *.local
 Dockerfile*
+!api/Dockerfile
+!client/Dockerfile
 
 # Mac
 .DS_Store
