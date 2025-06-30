@@ -11,6 +11,7 @@ logs
 # Environment files
 .env
 .env.*
+!api/.env.example
 
 # Next.js
 .next
@@ -21,7 +22,7 @@ out
 
 # Prisma
 prisma/dev.db
-prisma/migrations
+!api/prisma/migrations
 
 # Docker
 *.local

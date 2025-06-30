@@ -7,6 +7,14 @@ LifeScape is a tracker of life decisions visualized as a personal digital city. 
 
 The whole system runs with `docker-compose`.
 
+After starting the database service you can run API migrations and the seed script:
+
+```bash
+cd api
+npm run prisma:migrate
+npm run prisma:seed
+```
+
 ## Technology Stack
 
 - Node.js
