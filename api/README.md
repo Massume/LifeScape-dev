@@ -1,17 +1,34 @@
 # LifeScape API
 
-This folder contains the backend service built with [NestJS](https://nestjs.io/) and [Prisma](https://www.prisma.io/).
+This service is built with [NestJS](https://nestjs.com/) and [Prisma](https://prisma.io).
 
 ## Development
-
-During development you can start the API using:
 
 ```bash
 npm install
 npm run start:dev
 ```
 
-## Docker
+### Database migrations
 
-The service is configured to run via `docker-compose` from the repository root.
+Run pending migrations:
 
+```bash
+npm run prisma:migrate
+```
+
+Create new migration during development:
+
+```bash
+npm run prisma:migrate-dev --name <name>
+```
+
+### Seed database
+
+Execute seed script (after running migrations):
+
+```bash
+npm run prisma:seed
+```
+
+The default database connection is configured in `.env`.

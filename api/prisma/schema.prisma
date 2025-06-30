@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  passwordHash String
+  googleId     String?    @unique
+  isVerified   Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+  decisions    Decision[]
+  districts    District[]
+}
+
+model District {
+  id        String   @id @default(uuid())
+  name      String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  streets   Street[]
+}
+
+model Street {
+  id         String    @id @default(uuid())
+  name       String
+  districtId String
+  district   District  @relation(fields: [districtId], references: [id], onDelete: Cascade)
+  buildings  Building[]
+}
+
+model Building {
+  id        String   @id @default(uuid())
+  number    String
+  streetId  String
+  street    Street   @relation(fields: [streetId], references: [id], onDelete: Cascade)
+  decision  Decision?
+}
+
+model Decision {
+  id         String   @id @default(uuid())
+  title      String
+  isGood     Boolean
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  buildingId String   @unique
+  building   Building @relation(fields: [buildingId], references: [id], onDelete: Cascade)
+}

@@ -5,6 +5,8 @@ tasks:
     run: docker-compose exec api npx prisma migrate deploy
     watch:
       - api/prisma/migrations
+  rollback:
+    run: docker-compose exec api npx prisma migrate reset --force
 
   build:
     run: docker-compose build
