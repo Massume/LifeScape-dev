@@ -1,0 +1,14 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
+  grid-template-rows: repeat(5, 60px);
+  gap: 4px;
+  perspective: 800px;
+}
+.cell {
+  width: 60px;
+  height: 60px;
+  background: #ccc;
+  transform: skewY(-20deg) rotateX(45deg);
+  border: 1px solid #999;
+}

@@ -1,17 +1,19 @@
-# LifeScape Client
+# LifeScape Frontend
 
-This folder contains the frontend application built with [Next.js](https://nextjs.org/).
+This folder contains the Next.js application written in TypeScript. Pages are grouped using the App Router:
 
-## Development
+- `src/app/(auth)` – public pages for registration, login, email confirmation and Google OAuth2.
+- `src/app/(protected)` – pages available after authentication (city view, profile and CRUD screens).
 
-During development you can run:
+Run the development server with:
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Docker
+End-to-end UI tests are executed with Playwright:
 
-The client is also started through `docker-compose` from the project root.
-
+```bash
+npm run test:ui
+```
