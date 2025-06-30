@@ -7,13 +7,7 @@ LifeScape is a tracker of life decisions visualized as a personal digital city. 
 
 The whole system runs with `docker-compose`.
 
-After starting the database service you can run API migrations and the seed script:
-
-```bash
-cd api
-npm run prisma:migrate
-npm run prisma:seed
-```
+Copy `.env.example` to `.env` and adjust the values before running the stack.
 
 ## Technology Stack
 
@@ -30,7 +24,8 @@ npm run prisma:seed
 docker-compose up --build
 ```
 
-The API will be available on `http://localhost:3000` and the frontend on `http://localhost:3001` (ports can be adjusted in `docker-compose.yml`).
+The API will be available on `http://localhost:4000` with Swagger docs at `http://localhost:4000/docs`.
+The frontend will be served on `http://localhost:3000`.
 
 ## Authentication
 
